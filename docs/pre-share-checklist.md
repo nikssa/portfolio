@@ -6,12 +6,11 @@ paste it to a recruiter.
 Each item below notes whether it's **done**, **missing**, or **optional**, based
 on the current `index.html`.
 
-> **Production URL caveat:** the absolute-URL tags (canonical, `og:url`,
-> `og:image`, `twitter:image`) currently assume the default Vercel domain
-> `https://portfolio-nikssa.vercel.app/`. If your deployed domain differs,
+> **Production URL:** the absolute-URL tags (canonical, `og:url`, `og:image`,
+> `twitter:image`) point at the live deployment,
+> `https://portfolio-cyan-two-15.vercel.app/`. If you later add a custom domain,
 > change it in the single marked block at the top of `index.html`'s `<head>`,
-> then rebuild. Until that URL is live and correct, link previews won't fetch
-> the image.
+> then redeploy.
 
 ---
 
@@ -24,11 +23,11 @@ amber accent, "FE" watermark). The source is `scripts/og-card.html` — see
 The tags are in `index.html`:
 
 ```html
-<meta property="og:image" content="https://portfolio-nikssa.vercel.app/og.png" />
+<meta property="og:image" content="https://portfolio-cyan-two-15.vercel.app/og.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://portfolio-nikssa.vercel.app/og.png" />
+<meta name="twitter:image" content="https://portfolio-cyan-two-15.vercel.app/og.png" />
 ```
 
 **Still to do — validate the live preview after deploying** (the URL must
@@ -42,12 +41,12 @@ resolve for these to work):
 
 ## 2. Canonical URL & og:url — DONE
 
-Both present in `index.html` (pointing at the default Vercel domain — update if
-yours differs):
+Both present in `index.html` (pointing at the live deployment — update if you
+add a custom domain):
 
 ```html
-<link rel="canonical" href="https://portfolio-nikssa.vercel.app/" />
-<meta property="og:url" content="https://portfolio-nikssa.vercel.app/" />
+<link rel="canonical" href="https://portfolio-cyan-two-15.vercel.app/" />
+<meta property="og:url" content="https://portfolio-cyan-two-15.vercel.app/" />
 ```
 
 ---
@@ -131,8 +130,9 @@ Items 1–8 are implemented. The only remaining steps depend on having a live UR
 
 1. **Deploy** and confirm your actual domain (see
    [`deploy-to-vercel.md`](./deploy-to-vercel.md)).
-2. **If the domain isn't** `portfolio-nikssa.vercel.app`, update it in the
-   marked block at the top of `index.html`'s `<head>`, then redeploy.
+2. **If you add a custom domain** (not `portfolio-cyan-two-15.vercel.app`),
+   update it in the marked block at the top of `index.html`'s `<head>`, then
+   redeploy.
 3. **Validate the share preview** with the LinkedIn Post Inspector and the
    Facebook debugger (they cache — re-run after changes).
 4. Run the **functional pass** (#9) on the live site, including Lighthouse.
