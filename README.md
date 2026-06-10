@@ -45,5 +45,9 @@ See [`docs/`](docs/):
 
 - [`overview.md`](docs/overview.md) — architecture, structure, content model,
   design system.
+- [`editing-content.md`](docs/editing-content.md) — updating jobs, skills, and
+  bio via the single data file.
+- [`pre-share-checklist.md`](docs/pre-share-checklist.md) — SEO / social-preview
+  checks before sharing the URL.
 - [`deploy-to-vercel.md`](docs/deploy-to-vercel.md) — deploying on Vercel's free
   tier (CLI or Git).
