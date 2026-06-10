@@ -1,0 +1,54 @@
+main {
+  display: block;
+}
+
+/* ── Shared section scaffolding ── */
+.section {
+  position: relative;
+  padding-block: var(--section-y);
+  border-top: 1px solid var(--line-soft);
+}
+
+.section__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.75rem;
+  margin-bottom: clamp(2.5rem, 6vw, 5rem);
+}
+
+.section__index {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+}
+
+.section__title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(2.1rem, 6vw, 4rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+  font-optical-sizing: auto;
+}
+
+.section__lead {
+  max-width: 46ch;
+  color: var(--paper-dim);
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  margin-top: 0.5rem;
+}
+
+/* reveal-on-scroll baseline (JS toggles .is-in) */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.8s var(--ease),
+    transform 0.8s var(--ease);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
