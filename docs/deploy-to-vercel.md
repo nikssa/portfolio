@@ -10,6 +10,21 @@ Both are free. Pick one.
 
 ---
 
+## Current status (2026-06-10)
+
+- **Live:** <https://portfolio-cyan-two-15.vercel.app> — Vercel account
+  `nikssa-8456`, project `portfolio`. First deploy via Path A succeeded.
+- **GitHub:** `git@github.com:nikssa/portfolio.git` (branch `main`), pushed but
+  not yet connected to Vercel for auto-deploy (Path B).
+- **Known issue / pending:** a follow-up redeploy (to point the SEO absolute
+  URLs at the real domain) got stuck at Vercel status `UNKNOWN` for 20+ minutes
+  on both remote-build and `--prebuilt` paths, so **it did not land**. The fix
+  is committed on `main` (`7d24fc0`) but the live `og:image`/canonical still
+  serve the wrong domain until a successful deploy completes. Retry the CLI once
+  Vercel's queue clears, or connect Path B. See the troubleshooting table below.
+
+---
+
 ## Prerequisites
 
 - A [Vercel account](https://vercel.com/signup) (free; sign up with GitHub,
@@ -163,6 +178,7 @@ Exact quotas change over time — see Vercel's
 | Page 404s on refresh of a deep link       | Ensure `vercel.json`'s `rewrites` block is present (it is by default). |
 | CLI asks to link every time               | Don't delete the generated `.vercel/` folder in the project root.   |
 | Wrong framework detected                  | `vercel.json` pins `"framework": "vite"` — keep that file.          |
+| Deploy stuck at status `UNKNOWN` for many minutes | Seen 2026-06-10 on both remote-build and `--prebuilt`. A 9s build hanging 20+ min is a Vercel-side queue issue, not your build — retrying locally won't help. Cancel the stuck deploy (`npx vercel remove <url> --yes`), wait, then retry; or use Path B (Git integration) which deploys server-side. |
 
 ---
 
