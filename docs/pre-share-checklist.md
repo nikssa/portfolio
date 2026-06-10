@@ -1,64 +1,61 @@
 # Pre-Share / SEO Checklist
 
 Run through this before you put the URL on a job application, your LinkedIn, or
-paste it to a recruiter. The big one is the **social share image** — without it,
-pasting your link into LinkedIn / Slack / iMessage shows a blank or broken
-preview, which reads as unfinished.
+paste it to a recruiter.
 
 Each item below notes whether it's **done**, **missing**, or **optional**, based
 on the current `index.html`.
 
----
-
-## 1. Social share image (Open Graph) — MISSING, highest priority
-
-Right now there is no `og:image`, so link previews unfurl with no image.
-
-**Do this:**
-
-1. Create a 1200×630 PNG/JPG share card (name, title, maybe the amber-on-black
-   look of the site). Export it to `public/og.png`.
-2. Add these tags to `<head>` in `index.html` (replace the production URL with
-   your real one once deployed):
-
-   ```html
-   <meta property="og:image" content="https://YOUR-DOMAIN/og.png" />
-   <meta property="og:image:width" content="1200" />
-   <meta property="og:image:height" content="630" />
-   <meta name="twitter:card" content="summary_large_image" />
-   <meta name="twitter:image" content="https://YOUR-DOMAIN/og.png" />
-   ```
-
-   > `og:image` should be an **absolute** URL (scrapers don't resolve relative
-   > paths). Set it after you know your final domain.
-
-3. Validate the preview:
-   - LinkedIn: <https://www.linkedin.com/post-inspector/>
-   - General / Facebook: <https://developers.facebook.com/tools/debug/>
-   - (Re-run the inspector after changes — these services cache aggressively.)
+> **Production URL caveat:** the absolute-URL tags (canonical, `og:url`,
+> `og:image`, `twitter:image`) currently assume the default Vercel domain
+> `https://portfolio-nikssa.vercel.app/`. If your deployed domain differs,
+> change it in the single marked block at the top of `index.html`'s `<head>`,
+> then rebuild. Until that URL is live and correct, link previews won't fetch
+> the image.
 
 ---
 
-## 2. Canonical URL & og:url — MISSING
+## 1. Social share image (Open Graph) — DONE
 
-Tells search engines and scrapers the authoritative address. Add once you have
-your production domain:
+A 1200×630 share card is generated at `public/og.png` (on-brand: serif name,
+amber accent, "FE" watermark). The source is `scripts/og-card.html` — see
+[`scripts/README.md`](../scripts/README.md) to regenerate after branding tweaks.
+
+The tags are in `index.html`:
 
 ```html
-<link rel="canonical" href="https://YOUR-DOMAIN/" />
-<meta property="og:url" content="https://YOUR-DOMAIN/" />
+<meta property="og:image" content="https://portfolio-nikssa.vercel.app/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://portfolio-nikssa.vercel.app/og.png" />
+```
+
+**Still to do — validate the live preview after deploying** (the URL must
+resolve for these to work):
+
+- LinkedIn: <https://www.linkedin.com/post-inspector/>
+- General / Facebook: <https://developers.facebook.com/tools/debug/>
+- Re-run the inspector after any change — these services cache aggressively.
+
+---
+
+## 2. Canonical URL & og:url — DONE
+
+Both present in `index.html` (pointing at the default Vercel domain — update if
+yours differs):
+
+```html
+<link rel="canonical" href="https://portfolio-nikssa.vercel.app/" />
+<meta property="og:url" content="https://portfolio-nikssa.vercel.app/" />
 ```
 
 ---
 
-## 3. Twitter / X card tags — MISSING
+## 3. Twitter / X card tags — DONE
 
-If you share on X, add (the image tags above cover the visual):
-
-```html
-<meta name="twitter:title" content="Nikša Volarević — Senior Frontend Engineer" />
-<meta name="twitter:description" content="React · Next.js · TypeScript. 12+ years building React applications at scale." />
-```
+Present in `index.html`: `twitter:card` (`summary_large_image`),
+`twitter:title`, `twitter:description`, and `twitter:image`.
 
 ---
 
@@ -75,43 +72,32 @@ and link previews.
 
 ---
 
-## 5. Favicon — DONE
+## 5. Favicon & touch icon — DONE
 
-`public/favicon.svg` is the "NV" monogram, linked in `index.html`.
-
-**Optional polish:** some platforms (older browsers, iOS home-screen) prefer a
-PNG. If you want full coverage, add a `public/apple-touch-icon.png` (180×180)
-and:
-
-```html
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-```
+- `public/favicon.svg` — "NV" monogram, linked in `index.html`.
+- `public/apple-touch-icon.png` — 180×180 PNG for iOS home-screen, linked via
+  `<link rel="apple-touch-icon" href="/apple-touch-icon.png" />`. Source:
+  `scripts/touch-icon.html`.
 
 ---
 
-## 6. `robots.txt` — MISSING (optional)
+## 6. `robots.txt` — DONE
 
-Not required to be indexed, but a clean addition. Create `public/robots.txt`:
+`public/robots.txt` allows all crawlers:
 
 ```
 User-agent: *
 Allow: /
-
-Sitemap: https://YOUR-DOMAIN/sitemap.xml
 ```
 
-If you don't make a sitemap, drop the `Sitemap:` line. For a single-page site a
-sitemap is genuinely optional.
+No `Sitemap:` line — a sitemap is genuinely optional for a single-page site.
 
 ---
 
-## 7. `theme-color` — MISSING (optional, nice touch)
+## 7. `theme-color` — DONE
 
-Tints the browser UI on mobile to match the site:
-
-```html
-<meta name="theme-color" content="#0a0a0b" />
-```
+`<meta name="theme-color" content="#0a0a0b" />` is in `index.html` — tints the
+mobile browser UI to match the dark canvas.
 
 ---
 
@@ -139,12 +125,14 @@ Tints the browser UI on mobile to match the site:
 
 ---
 
-## Suggested order
+## What's left
 
-1. Make and add the **OG share image** (#1) — biggest visible payoff.
-2. Deploy, get your final URL.
-3. Fill in the **absolute URLs**: canonical, `og:url`, `og:image` (#1–#3).
-4. Add the small niceties: `theme-color`, `robots.txt`, apple-touch-icon
-   (#6, #7, #5) if you want them.
-5. Run the **functional pass** (#9), then re-validate the link preview with the
-   LinkedIn Post Inspector.
+Items 1–8 are implemented. The only remaining steps depend on having a live URL:
+
+1. **Deploy** and confirm your actual domain (see
+   [`deploy-to-vercel.md`](./deploy-to-vercel.md)).
+2. **If the domain isn't** `portfolio-nikssa.vercel.app`, update it in the
+   marked block at the top of `index.html`'s `<head>`, then redeploy.
+3. **Validate the share preview** with the LinkedIn Post Inspector and the
+   Facebook debugger (they cache — re-run after changes).
+4. Run the **functional pass** (#9) on the live site, including Lighthouse.

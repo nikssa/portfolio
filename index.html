@@ -2,19 +2,50 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--
+      ┌─────────────────────────────────────────────────────────────────┐
+      │ PRODUCTION URL — change in ONE place after deploy if it differs.  │
+      │ Default Vercel domain assumed below: portfolio-nikssa.vercel.app  │
+      │ The canonical, og:url, og:image, and twitter:image tags use it.   │
+      │ These MUST be absolute URLs (social scrapers don't resolve paths).│
+      └─────────────────────────────────────────────────────────────────┘
+    -->
+
+    <title>Nikša Volarević — Senior Frontend Engineer</title>
     <meta
       name="description"
       content="Nikša Volarević — Senior Frontend Engineer. React, Next.js, TypeScript. 12+ years building React applications at scale."
     />
     <meta name="author" content="Nikša Volarević" />
+    <link rel="canonical" href="https://portfolio-nikssa.vercel.app/" />
+    <meta name="theme-color" content="#0a0a0b" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://portfolio-nikssa.vercel.app/" />
     <meta property="og:title" content="Nikša Volarević — Senior Frontend Engineer" />
     <meta
       property="og:description"
       content="React · Next.js · TypeScript. 12+ years building React applications at scale. Currently at Ticketmaster."
     />
-    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://portfolio-nikssa.vercel.app/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Nikša Volarević — Senior Frontend Engineer" />
+    <meta
+      name="twitter:description"
+      content="React · Next.js · TypeScript. 12+ years building React applications at scale."
+    />
+    <meta name="twitter:image" content="https://portfolio-nikssa.vercel.app/og.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,8 +53,6 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-
-    <title>Nikša Volarević — Senior Frontend Engineer</title>
   </head>
   <body>
     <div id="root"></div>
